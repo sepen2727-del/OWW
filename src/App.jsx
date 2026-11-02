@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import LoginPage from './LoginPage';
-//import { useState } from 'react';
+import HomePage from './HomePage';
 //import heroImg from './assets/hero.png'
 //import reactLogo from './assets/react.svg'
 //import viteLogo from './assets/vite.svg'
@@ -8,9 +9,16 @@ import './App.css';
 function App() {
   //const [count, setCount] = useState(0)
 
+  // 로그인한 사용자 아이디 (null이면 로그인 전)
+  const [loginUser, setLoginUser] = useState(null);
+
   return (
     <>
-      <LoginPage />
+      {loginUser ? (
+        <HomePage userId={loginUser} onLogout={() => setLoginUser(null)} />
+      ) : (
+        <LoginPage onLoginSuccess={setLoginUser} />
+      )}
 
       {/*
 		
